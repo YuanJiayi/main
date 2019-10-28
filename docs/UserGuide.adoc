@@ -136,7 +136,7 @@ it can be used to take feedback from instructors and lesson notes respectively. 
 Format: `details <task index>` or `notes <task index>`
 
 
-=== Rescheduling events :
+=== Rescheduling events : `reschedule`
 
 The user will be able to reschedule an existing event. +
 

@@ -1,4 +1,5 @@
 = Yuan Jiayi - Project Portfolio for MisterMusik
+:icons: font
 :site-section: ProjectPortfolio
 :toc:
 :toc-title:
@@ -22,7 +23,8 @@ scheduling and organisation of materials, allowing the students to focus more on
 education.
 
 This is what our project looks like:
-image::
+
+image::Ui.png[width = "800"]
 _Figure 1. The graphical user interface for *MisterMusik*._
 
 My role is to design and write the codes for the `recurring event` and `reschedule` features. The following sections
@@ -43,35 +45,95 @@ _addRecurringEvent_ : Italic text indicates a component, object, class, or metho
 This section shows a summary of my coding, documentation, and other helpful contributions to the team project.
 
 === Enhancement added:
-I added the ability to add recurring events, reschedule the events in the list, and add contacts of tutors.
+I added the ability to add recurring events, reschedule the events in the list, and add contacts.
 
 ==== Add recurring events
 . What it does: The `lesson` and `practice` commands allow the user to add recurring events happen in 16 weeks,
 using input format `lesson/practice <description> /dd-MM-yyyy HHmm HHmm /period(in days)`.
 . Justification: Some events are recurring, like some lessons happen once a week, or practices happen every two days.
 The command with period enables users to add recurring events easily, instead of adding them one by one.
-. Highlight:
+. Highlight: This implementation was challenge because the date in String format is needed when adding the new event to
+the list. However, the way to get the new date by calendar calculating was in Java Date type. Hence, a way to transfer
+Java Date type date to String type date was added to _EventDate_ class.
 
 ==== Reschedule
 . What it does: The `reschedule` command allows the user to change the date and time of an event in the list.
 . Justification: In the event that users have made a mistake or changed their minds about the date and time, the
 `reschedule` command enables them to change the start and end date and time of the event in the list.
 
-==== Add contacts
-. What it does:
-. Justification:
 
 === Code contributed:
 Please click these links to see a sample of my code:
+https://github.com/AY1920S1-CS2113T-F11-4/main/pull/10[#10],
+https://github.com/AY1920S1-CS2113T-F11-4/main/pull/15[#15],
+https://github.com/AY1920S1-CS2113T-F11-4/main/pull/42[#42],
+https://github.com/AY1920S1-CS2113T-F11-4/main/pull/81[#81],
+https://github.com/AY1920S1-CS2113T-F11-4/main/pull/95[#95],
+https://github.com/AY1920S1-CS2113T-F11-4/main/pull/96[#96]
 
 === Other contributions:
 . Project management:
-.. dsf
+.. Create and Manage issues on GitHub.
+.. Create and Manage milestones (1.1 to 1.4) on GitHub.
+
 . Enhancements to existing features:
+
 . Documentation:
+.. Add the basic information to the User Guide: https://github.com/AY1920S1-CS2113T-F11-4/main/pull/66[#66]
+.. Restructure README file to make it fits the project style:
+https://github.com/AY1920S1-CS2113T-F11-4/main/pull/37[#37],
+https://github.com/AY1920S1-CS2113T-F11-4/main/pull/38[#38]
+.. Add AboutUs page to introduce the team: https://github.com/AY1920S1-CS2113T-F11-4/main/pull/37[#37]
+.. Add information about recurring events and reschedule implementations to the Developer Guide:
+https://github.com/AY1920S1-CS2113T-F11-4/main/pull/91[#91],
+https://github.com/AY1920S1-CS2113T-F11-4/main/pull/105[#105]
+
 . Community:
 .. Reviewed Pull Requests:
 
 == Contributions to the User Guide
+We had to update the original User Guide with instructions for the enhancements that we had added. The following is an
+excerpt from our MisterMusik User Guide, showing additions that I have made for the `reschedule` and recurring events
+features.
+
+This section also contains an excerpt for the feature that I have planned for the next version (v2.0) of MisterMusik.
+
+=== Recurring events :
+MisterMusik allows the user to add recurring events (e.g. weekly lessons).
+The input format is as per normal with an extra recurring period input.
+This only works with lesson and practice type events. Concerts, exams and
+recitals cannot be entered as recurring events.
+
+Format: `<type of event> <description> /dd-MM-yyyy HHmm HHmm /period(days)`
+
+Example: +
+Let's say that you have a CG lesson which is on every Monday morning in 19/20 semester 1. +
+Instead of typing the command to add these lessons one by one, you can easily add `/7` after `lesson CG /13-08-2019
+1000 1200` which is the command of adding the first lesson to add these recurring events in one semester in one command.
+
+To add recurring events:
+
+. Type `lesson CG /13-08-2019 1000 1200 /7` into the command line, and press kbd:[Enter] to execute it.
+image::
+. The message "" will be displayed.
+image::
+. And you can type `list` to check whether the events have been added.
+image::
+
+[TIP]
+*The recurring events feature applies to lesson and practice types of events only.* +
+Format: `practice <description> /dd-MM-yyyy HHmm HHmm /period(in days)`, `lesson <description> /dd-MM-yyyy HHmm HHmm
+/period(in days)`
+
+[TIP]
+*The maximum days between the first recurring event happens and the last one added to the list are fixed to 112
+days(16 weeks).* +
+It will waste a lot of memory if adding too much events which happen far from now. 112 days are quite similar to the
+length of one semester, so that you can manage recurring events easier.
+
+=== Rescheduling events : `reschedule`
+The user will be able to reschedule an existing event. +
+
+Format: `reschedule <task index> dd-MM-yyyy HHmm HHmm`
 
 == Contributions to the Developer Guide
