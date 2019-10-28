@@ -1,0 +1,77 @@
+= Yuan Jiayi - Project Portfolio for MisterMusik
+:site-section: ProjectPortfolio
+:toc:
+:toc-title:
+:toc-placement: preamble
+:sectnums:
+:imagesDir: images
+:stylesDir: stylesheets
+:xrefstyle: full
+:experimental:
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+endif::[]
+:repoURL: https://github.com/
+
+== About the project
+My team of 5 computer engineering students were tasked with enhancing a program Duke for our CS2113T project.
+We chose to design a scheduler application for serious music students pursuing a professional music career as
+a western classical music performer. The program is designed to automate and streamline most of the process in
+scheduling and organisation of materials, allowing the students to focus more on the important aspects of their
+education.
+
+This is what our project looks like:
+image::
+_Figure 1. The graphical user interface for *MisterMusik*._
+
+My role is to design and write the codes for the `recurring event` and `reschedule` features. The following sections
+illustrate these enhancements in more detail, as well as the relevant documentation I have added to the user and
+developer guides in relation to these enhancements.
+
+Note the following symbols and formatting used in this document:
+====
+[TIP]
+This symbol indicates important information.
+
+`reschedule` : A grey highlight (called a mark-up) indicates that this is a command that can be inputted into the
+command line and executed by the application.
+
+_addRecurringEvent_ : Italic text indicates a component, object, class, or method.
+====
+== Summary of contributions
+This section shows a summary of my coding, documentation, and other helpful contributions to the team project.
+
+=== Enhancement added:
+I added the ability to add recurring events, reschedule the events in the list, and add contacts of tutors.
+
+==== Add recurring events
+. What it does: The `lesson` and `practice` commands allow the user to add recurring events happen in 16 weeks,
+using input format `lesson/practice <description> /dd-MM-yyyy HHmm HHmm /period(in days)`.
+. Justification: Some events are recurring, like some lessons happen once a week, or practices happen every two days.
+The command with period enables users to add recurring events easily, instead of adding them one by one.
+. Highlight:
+
+==== Reschedule
+. What it does: The `reschedule` command allows the user to change the date and time of an event in the list.
+. Justification: In the event that users have made a mistake or changed their minds about the date and time, the
+`reschedule` command enables them to change the start and end date and time of the event in the list.
+
+==== Add contacts
+. What it does:
+. Justification:
+
+=== Code contributed:
+Please click these links to see a sample of my code:
+
+=== Other contributions:
+. Project management:
+.. dsf
+. Enhancements to existing features:
+. Documentation:
+. Community:
+.. Reviewed Pull Requests:
+
+== Contributions to the User Guide
+
+== Contributions to the Developer Guide
