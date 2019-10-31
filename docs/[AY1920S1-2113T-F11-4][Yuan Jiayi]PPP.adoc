@@ -16,11 +16,9 @@ endif::[]
 :repoURL: https://github.com/
 
 == About the project
-My team of 5 computer engineering students were tasked with enhancing a program Duke for our CS2113T project.
-We chose to design a scheduler application for serious music students pursuing a professional music career as
-a western classical music performer. The program is designed to automate and streamline most of the process in
-scheduling and organisation of materials, allowing the students to focus more on the important aspects of their
-education.
+MisterMusik is a Command line interface (CLI) based application that allows for music students studying at the National
+University of Singapore(NUS) to have a centralized scheduling platform for all their music based activities. The user
+interface is entirely command line based and the application is written in java.
 
 This is what our project looks like:
 
