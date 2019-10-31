@@ -32,14 +32,25 @@ public class UI {
     /**
      * prints welcome message and instructions for use.
      */
-    public void welcome(EventList Events) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println(lineSeparation + "Hello! I'm Duke\nWhat can I do for you?\n");
+    public void welcome() {
+        String logo = " ___    ___   __________    __________   __________   __________   _________" + "\n"
+                + "|   \\  /   | |___    ___|  /  ________| |___    ___| |   _______| |   ____  \\" + "\n"
+                + "| |\\ \\/ /| |     |  |     /  /              |  |     |  |         |  |    \\  \\" + "\n"
+                + "| | \\  / | |     |  |     \\  \\_______       |  |     |  |____     |  |____/  /" + "\n"
+                + "| |  \\/  | |     |  |      \\_______  \\      |  |     |   ____|    |   ___   /" + "\n"
+                + "| |      | |     |  |              \\  \\     |  |     |  |         |  |   \\  \\" + "\n"
+                + "| |      | |  ___|  |___   ________/  /     |  |     |  |_______  |  |    |  |" + "\n"
+                + "|_|      |_| |__________| |__________/      |__|     |__________| |__|    |__|" + "\n"
+                + " ___    ___   __      __    __________   __________   __      __ " + "\n"
+                + "|   \\  /   | |  |    |  |  /  ________| |___    ___| |  |    /  /" + "\n"
+                + "| |\\ \\/ /| | |  |    |  | /  /              |  |     |  |   /  /" + "\n"
+                + "| | \\  / | | |  |    |  | \\  \\_______       |  |     |  |__/  /" + "\n"
+                + "| |  \\/  | | |  |    |  |  \\_______  \\      |  |     |   __  |" + "\n"
+                + "| |      | | |  |    |  |          \\  \\     |  |     |  |  \\  \\" + "\n"
+                + "| |      | | |  |____|  |  ________/  /  ___|  |___  |  |   \\  \\" + "\n"
+                + "|_|      |_| |__________| |__________/  |__________| |__|    \\__\\" + "\n";
+        System.out.println(logo);
+        System.out.println(lineSeparation + "Hello! I'm MisterMusik!\nWhat can I do for you?\n");
 
         System.out.println("Commands:");
         System.out.println("1. list: Print a list of events currently stored.");
@@ -74,23 +85,6 @@ public class UI {
         System.out.print(lineSeparation);
         System.out.println("Sorry! I don't know what that means.");
         System.out.print(lineSeparation);
-    }
-
-    public void printEventGoals(Event viewEventGoal) {
-        System.out.println("Here is the list of goals for the following event: " + viewEventGoal.toString());
-        int goalIndex = 1;
-        for (Goal goalObject : viewEventGoal.getGoalList()) {
-            System.out.println(goalIndex + ". " + goalObject.getGoal());
-            goalIndex += 1;
-        }
-    }
-
-    public void goalAdded() {
-        System.out.println("Ok, the goal has been added to the event.");
-    }
-
-    public void goalDeleted() {
-        System.out.println("Ok, the goal has been deleted from the event.");
     }
 
     public void contactAdded() {
@@ -350,7 +344,7 @@ public class UI {
 
     public void printCalendar(String calendarInfo) {
         System.out.print(lineSeparation);
-        System.out.println("Here is the calendar of the next 7 days!");
+        System.out.println("Here is the calendar of the 7 days!");
         System.out.println(calendarInfo);
         System.out.println("\nEnter a command:");
     }
@@ -378,6 +372,39 @@ public class UI {
         System.out.print(lineSeparation);
     }
 
+    public void printEventGoals(Event viewEventGoal) {
+        System.out.println("Here is the list of goals for the following event: " + viewEventGoal.toString());
+        if (!viewEventGoal.getGoalList().isEmpty()) {
+            int goalIndex = 1;
+            for (Goal goalObject : viewEventGoal.getGoalList()) {
+                System.out.println(goalIndex + ". " + goalObject.getGoal() + " - " + "Achieved: " + goalObject.getStatus());
+                goalIndex += 1;
+            }
+        } else {
+            System.out.println("You currently have no goals for this event.");
+        }
+    }
+
+    public void goalAdded() {
+        System.out.println("Ok, the goal has been added to the event.");
+    }
+
+    public void goalDeleted() {
+        System.out.println("Ok, the goal has been deleted from the event.");
+    }
+
+    public void goalUpdated() {
+        System.out.println("Ok, the goal has been updated.");
+    }
+
+    public void goalSetAsAchieved() {
+        System.out.println("Ok, the goal has been set as achieved. Congratulations for achieving the goal!");
+    }
+
+    public void noSuchGoal() {
+        System.out.println("Sorry, the specified goal does not exist!");
+    }
+  
     public void checklistDeleted(int eventIndex) {
         System.out.print(lineSeparation);
         System.out.println("Ok, checklist of event " + eventIndex + 1 + " has been deleted.");
@@ -410,5 +437,37 @@ public class UI {
             checklistIndex += 1;
         }
         System.out.print(lineSeparation);
+    }
+    
+    public void instrumentAdded(String instrumentIndexAndName) {
+    	System.out.print(lineSeparation);
+    	System.out.println("Ok, the following instrument has been added: ");
+    	System.out.println(instrumentIndexAndName);
+    	System.out.println(lineSeparation);
+    }
+    
+    public void serviceAdded(String serviceIndexAndName, String instrumentIndexAndName) {
+    	System.out.println(lineSeparation);
+    	System.out.println("Ok, the following service: ");
+    	System.out.println(serviceIndexAndName);
+    	System.out.println("has been added for the following instrument: ");
+    	System.out.println(instrumentIndexAndName);
+    	System.out.println(lineSeparation);
+    }
+    
+    public void printInstruments(String instruments) {
+    	System.out.println(lineSeparation);
+    	System.out.println("Here are the list of instruments stored in the system: ");
+    	System.out.println(instruments);
+    	System.out.println(lineSeparation);
+    }
+    
+    public void printServices(String services, String instrumentIndexAndName) {
+    	System.out.println(lineSeparation);
+    	System.out.println("Here are the list of services: ");
+    	System.out.println(services);
+    	System.out.println("Done before for the following instrument: ");
+    	System.out.println(instrumentIndexAndName);
+    	System.out.println(lineSeparation);
     }
 }

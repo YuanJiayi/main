@@ -16,12 +16,15 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Allows for access to the list of events currently stored, and editing that list of events.
  * Does NOT contain any methods for reading/writing to savefile.
  */
 public class EventList {
+    private static Logger logger = Logger.getLogger("EventList");
     /**
      * list of Model_Class.Event objects currently stored.
      */
@@ -61,23 +64,22 @@ public class EventList {
         for (String currLine : inputList) {
             boolean isDone = currLine.substring(0, 1).equals("V");
             char eventType = currLine.charAt(1);
+            String[] splitString = currLine.split("/");
 
             if (eventType == TODO) {
-                String[] splitString = currLine.split(" ");
                 String description = splitString[1];
                 String date = splitString[2];
                 eventArrayList.add(new ToDo(description, isDone, date));
 
             } else { //for all other events
-                String[] splitString = currLine.split(" ");
                 String description = splitString[1];
-                String startDateAndTime = splitString[2] + " " + splitString[3];
-                String endDateAndTime = splitString[4] + " " + splitString[5];
+                String startDateAndTime = splitString[2];
+                String endDateAndTime = splitString[3];
 
                 switch (eventType) {
                     case CONCERT:
                         eventArrayList.add(new Concert(description, isDone, startDateAndTime, endDateAndTime,
-                                Integer.parseInt(splitString[6])));
+                                Integer.parseInt(splitString[4])));
                         break;
 
                     case LESSON:
@@ -121,6 +123,7 @@ public class EventList {
      */
     public void addEvent(Event event) throws EndBeforeStartException, ClashException, CostExceedsBudgetException {
         if (event.getStartDate().getEventJavaDate().compareTo(event.getEndDate().getEventJavaDate()) == 1) {
+            logger.log(Level.WARNING, "The end time is earlier than the start time");
             throw new EndBeforeStartException();
         }
 
@@ -131,20 +134,23 @@ public class EventList {
             }
 
             this.eventArrayList.add(event);
+            logger.log(Level.INFO, "The new event is added to the eventList");
         } else { //if clash is found, notify user via terminal.
+            logger.log(Level.WARNING, "The event to be added clashes with another event in the list");
             throw new ClashException(clashEvent);
         }
     }
 
     public void addNewTodo(Event event) {
         this.eventArrayList.add(event);
+        logger.log(Level.INFO, "The new Todo is added to the eventList");
     }
 
     //@@author YuanJiayi
     /**
-     * Adds recurring events to the event list.
+     * Adds recurring events to the list.
      *
-     * @param event  Event to be added.
+     * @param event  Event to be added as recursion.
      * @param period Period of the recursion.
      */
     public void addRecurringEvent(Event event, int period) throws ClashException {
@@ -172,6 +178,7 @@ public class EventList {
             if (clashEvent(newEvent) == null) {
                 tempEventList.add(newEvent);
             } else {
+                logger.log(Level.WARNING, "At least one of the events to be added clashes with another event in the list");
                 throw new ClashException(newEvent);
             }
             calendarStartDate.add(Calendar.DATE, period);
@@ -179,6 +186,7 @@ public class EventList {
         }
 
         this.eventArrayList.addAll(tempEventList);
+        logger.log(Level.INFO, "Recurring events are added to the list");
     }
 
     //@@author
@@ -209,9 +217,11 @@ public class EventList {
 
             if (newEventDate.equals(currEventStartDateTime[0]) && //check for same date
                     timeClash(newEventStartTime, newEventEndTime, currEventStartDateTime[1], currEventEndDateTime[1])) { //check for time clash
+                logger.log(Level.INFO, "Clash found");
                 return currEvent; //clash found
             }
         }
+        logger.log(Level.INFO, "No clash found");
         return null; //no clash found
     }
 
@@ -250,6 +260,7 @@ public class EventList {
             budgeting.removeMonthlyCost((Concert) this.eventArrayList.get(eventNo));
         }
         this.eventArrayList.remove(eventNo);
+        logger.log(Level.INFO, "The event is deleted");
     }
 
     /**
@@ -303,7 +314,7 @@ public class EventList {
         int j;
         for (int i = 0; i < eventArrayList.size(); ++i) {
             if (eventArrayList.get(i) == null) continue;
-            else if (!predicate.check(eventArrayList.get(i).getStartDate())) continue; 
+            else if (!predicate.check(eventArrayList.get(i).getStartDate())) continue;
             j = i + 1;
             filteredEvents += j + ". " + this.getEvent(i).toString() + "\n";
         }
@@ -333,13 +344,15 @@ public class EventList {
                 this.budgeting.updateMonthlyCost((Concert) event);
             }
         } catch (CostExceedsBudgetException e) {
+            logger.log(Level.WARNING, e.getMessage(), e);
             //ignore exception, will never happen
         }
         eventArrayList.add(event);
+        logger.log(Level.INFO, "The deleted event is added back to the list");
     }
-
 
     public Budgeting getBudgeting() {
         return budgeting;
     }
+
 }
