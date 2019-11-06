@@ -69,6 +69,17 @@ email address, and phone number.
 to add, delete, edit, and view sets of information (includes name, email, and phone number) for the people to contact.
 Also, users can edit only the name, email, or phone number of a set of contact information.
 
+==== Help list
+. What it does: A help list including basic commands will be printed on the welcome page. The user is able to enter the
+first word of each command to see the detailed format of that command. Some commands are combined, for example, the user
+needs to enter `help event` to see the combined list of formats for adding todo and different types of events.
+. Justification: It is inconvenient for users to remember all the correct input formats of too many features and
+commands, so that a help list with basic command formats on welcome page could give users a clear map to find out what
+can MisterMusik do. Also, when users type a command with incorrect format, they would like to know the correct format of
+that specified command. Consider that printing out all the command formats together could lead to a long list which is
+hard to find and messy up the welcome page, the help list only contains basic command formats and commands to see the
+combined detailed formats.
+
 === Code contributed:
 Please click these links to see a sample of my code:
 https://nuscs2113-ay1920s1.github.io/dashboard/#=undefined&search=yuanjiayi[sample code]
@@ -89,6 +100,8 @@ https://github.com/AY1920S1-CS2113T-F11-4/main/pull/91[#91],
 https://github.com/AY1920S1-CS2113T-F11-4/main/pull/105[#105]
 .. Add information about contact management: https://github.com/AY1920S1-CS2113T-F11-4/main/pull/119[#119],
 https://github.com/AY1920S1-CS2113T-F11-4/main/pull/126[#126]
+.. Restructure the User Guide to fit v1.4 and reader friendly:
+https://github.com/AY1920S1-CS2113T-F11-4/main/pull/242[#242]
 
 == Contributions to the User Guide
 We had to update the original User Guide with instructions for the enhancements that we had added. The following is an
@@ -193,6 +206,22 @@ image::contactDelete.png[width = "800"]
 [TIP]
 If the event does not have any contact set in its contact list, the message "Do not have any contact in this event."
 will be displayed.
+
+=== Help list : `help`
+The user is able to see a list of correct command formats on the welcome page of MisterMusik. The user is also able to
+seek help whenever he or she wants the correct format of a specified command.
+
+Format: `help [<command type>]`
+[TIP]
+`command type` indicates the first word of the command. Or `event` to see the combined formats of adding todo and
+different types of events. Or `change` to see the combined formats of changing basic information including description,
+date, and status of a task in the list.
+
+Example: +
+Let's say that you forget the correct input format of rescheduling an event in the list.
+- Type `help reschedule|change` and press kbd:[Enter] to see the correct format.
+
+image::helpReschedule.png[width = "800"]
 
 == Contributions to the Developer Guide
 The following section shows my additions to the MisterMusik Developer Guide for recurring events feature.
