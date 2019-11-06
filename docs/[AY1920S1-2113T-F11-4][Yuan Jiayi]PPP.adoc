@@ -47,7 +47,7 @@ I added the ability to add recurring events, reschedule the events in the list, 
 
 ==== Add recurring events
 . What it does: The `lesson` and `practice` commands allow the user to add recurring events happen in 16 weeks,
-using input format `lesson/practice <description> /dd-MM-yyyy HHmm HHmm /period(in days)`.
+using input format `lesson/practice <description> /dd-MM-yyyy HHmm HHmm /<period(in days)>`.
 . Justification: Some events are recurring, like some lessons happen once a week, or practices happen every two days.
 The command with period enables users to add recurring events easily, instead of adding them one by one.
 . Highlight: This implementation was challenge because the date in String format is needed when adding the new event to
@@ -61,7 +61,7 @@ Java Date type date to String type date was added to _EventDate_ class.
 
 ==== Contact management
 . What it does: Each event in the list has a contact list to store the information of contacts which are relative to
-this event. The commands `contact add <event index> /<name>, <email> <phone number>`, `contact delete <event index>
+this event. The commands `contact add <event index> /<name>, [<email>], [<phone number>]`, `contact delete <event index>
 <contact index> /`, `contact edit <event index> <contact index> <edit type> /<new contact information>`, `contact view
 <event index> /` allow users to add, delete, edit, and view contacts in the list. Each _Contact_ item includes name,
 email address, and phone number.
@@ -115,7 +115,7 @@ MisterMusik allows the user to add recurring events (e.g. weekly lessons). The i
 an extra recurring period input. This only works with lesson and practice type events. Concerts, exams and recitals
 cannot be entered as recurring events.
 
-Format: `<type of event> <description> /dd-MM-yyyy HHmm HHmm /period(days)`
+Format: `<type of event> <description> /dd-MM-yyyy HHmm HHmm /<period(in days)>`
 
 Example: +
 Let's say that you have a CG lesson which is on every Monday morning in 19/20 semester 1. +
@@ -175,13 +175,17 @@ The user is able to add, delete, view, and edit contacts information of an exist
 includes name, email address, and phone number.
 
 .  Add a contact set into an existing event +
-Format: `contact add <event index> /<name>, <email>, <phone number>`
+Format: `contact add <event index> /<name>, [<email>], [<phone number>]`
+
+[TIP]
+The email address and phone number are optional information for a contact set. If the user does not want to add email
+and phone number, just leave the information in [] blank, but remember to input `,`.
 
 . Delete a contact set in an existing event +
-Format: `contact delete <event index> <contact index> /`
+Format: `contact delete <event index> <contact index>`
 
 . View contact list of an existing event +
-Format: `contact view <event index> /`
+Format: `contact view <event index>`
 
 . Edit one type of information in the contact set of an existing event +
 Format: `contact edit <event index> <contact index> <edit type> /<new contact information>` +
@@ -192,16 +196,16 @@ Let's say that you want to manage your TA's contact information to a lesson even
 - Type `contact add 1 /TA: Jason, jason@u.nus.edu, 87311432` and press kbd:[Enter] to add it.
 
 image::contactAdd.png[width = "800"]
-- Type `contact view 1 /` and press kbd:[Enter] to view the contact list of the event.
+- Type `contact view 1` and press kbd:[Enter] to view the contact list of the event.
 
-image::contactView.png[width = "800"]
+image::contactView.png[width = "800"] //need update
 - Type `contact edit 1 1 phone /87311433` and press kbd:[Enter] to edit the phone number of the first contact set in
 the event.
 
 image::contactEdit.png[width = "800"]
-- Type `contact delete 1 1 /` and press kbd:[Enter] to delete the first contact set of the event.
+- Type `contact delete 1 1` and press kbd:[Enter] to delete the first contact set of the event.
 
-image::contactDelete.png[width = "800"]
+image::contactDelete.png[width = "800"] //need update
 
 [TIP]
 If the event does not have any contact set in its contact list, the message "Do not have any contact in this event."
@@ -255,7 +259,7 @@ Non-recurring event: `<event type> <event description> /dd-MM-yyyy HHmm HHmm`
 ==== Sequence diagram
 The following sequence diagram shows how the adding recurring event operation works.
 ====
-image::recurringEventSequenceDiagram.png[width = "800"]
+image::recurringEventSequenceDiagram.png[width = "800"] //need update
 ====
 
 ==== Why it is implemented this way
